@@ -19,14 +19,14 @@ public class Board {
     public Board() throws IOException {
         deck = new Deck();
         playerList = new ArrayList<Player>();
-        currentAge = 1;
+        //currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
 
         for (int i = 0; i < 3; i++)
             playerList.add(new Player(i));
 
-        deal(currentAge);
+        //deal(currentAge);
         ArrayList<Wonder> WonderList = new ArrayList<Wonder>();
 
         for (String s : Wonder.WONDERS ) {

@@ -128,7 +128,7 @@ public class Deck {
 //	            	System.out.print(s);
 //	            System.out.println("\n"+temp[3]);
                 int age = Integer.parseInt(temp[3]);
-                Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
+                Card card = new Card(temp[0], temp[1], temp[2], temp[4], temp[5], temp[6]);
                 if (age == 1)
                     getAgeOne().add(card);
                 else if (age == 2)

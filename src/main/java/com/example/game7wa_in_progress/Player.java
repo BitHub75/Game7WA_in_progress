@@ -4,22 +4,23 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Player implements Comparable<Player> {
-    private int money, warMinusPoints, warPlusPoints, armies, index, vp;
-    private TreeMap<String, Integer> vpSources;
-    private TreeMap<String, Boolean> reducedList;
-    private TreeMap<String, Integer> sciList;
-    private TreeMap<String, ArrayList<Card>> playedCards;
-    private ArrayList<Card> hand;
-    private Wonder wonder;
-    private ArrayList<Resources> resources;
-    private ArrayList<Card> tempPlayedCards;
-    private boolean burnCard;
-    private boolean ignoreCost;
-    private boolean buildWonder;
-    private boolean Has_VP_Effect;
-    private TreeMap<Integer, ArrayList<Resources>> trade; // Player index, resources
-    private boolean isDrawDiscard;
+    private int money, warMinusPoints, warPlusPoints, armies, index, vp; //argent, Points de geurre négatifs, Points de guerre positifs, Armees, index, Victory Points
+    private TreeMap<String, Integer> vpSources; //source des VP
+    private TreeMap<String, Boolean> reducedList; //liste des reductions
+    private TreeMap<String, Integer> sciList; //liste des points scientifiques
+    private TreeMap<String, ArrayList<Card>> playedCards; //liste cartes jouees
+    private ArrayList<Card> hand; //liste cartes dans la main
+    private Wonder wonder; //merveilles
+    private ArrayList<Resources> resources; //resources
+    private ArrayList<Card> tempPlayedCards; //liste des temps écoulés par carte jouée
+    private boolean burnCard; //cartes mortes
+    private boolean ignoreCost; //si une carte n'a pas de cout
+    private boolean buildWonder; //pour construire une etape d'une merveille
+    private boolean Has_VP_Effect; //si une carte a un effet avec des VP
+    private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
+    private boolean isDrawDiscard; //?
 
+    //definition player
     public Player(int index) {
         vp = 0;
         money = 3;
@@ -55,15 +56,18 @@ public class Player implements Comparable<Player> {
         setDrawDiscard(false);
     }
 
+    //action de jouer une carte
     public void play(Card c) {
         addTempPlayedCard(c);
         getHand().remove(c);
     }
 
+    //action de faire un echange
     public TreeMap<Integer, ArrayList<Resources>> getTrade() {
         return trade;
     }
 
+    //Getters/Setters
     public void setTrade(TreeMap<Integer, ArrayList<Resources>> trade) {
         this.trade = trade;
     }
@@ -236,10 +240,12 @@ public class Player implements Comparable<Player> {
         return isDrawDiscard;
     }
 
+    //?
     public void setDrawDiscard(boolean isDrawDiscard) {
         this.isDrawDiscard = isDrawDiscard;
     }
 
+    //action de comparer un player
     public int compareTo(Player p) {
         if (p.getVp() > getVp())
             return -1;
@@ -249,6 +255,7 @@ public class Player implements Comparable<Player> {
             return 0;
     }
 
+    //action d'ajouter une carte aux cartes jouees
     public void addToPlayedCards(Card c) {
         String type = c.getType().toLowerCase();
         if (playedCards.containsKey(type)) {

@@ -62,21 +62,8 @@ public class Board {
             } else if (effect.equalsIgnoreCase("scienceAll")) // call at end of game right before VP calc
             {
                 p.addToPlayedCards(
-                        new Card("Scientistsguild", "Purple", "S All", 3, " ", "false", "Wood,Wood,Ore,Ore,Papyrus")); // adds
-                // guild
-                // to
-                // the
-                // played
-                // card
-                // the
-                // player
-                // has
-                // b/c
-                // they
-                // have
-                // the
-                // same
-                // effect
+                        new Card("Scientistsguild", "Purple", "S All", " ", "false", "Wood,Wood,Ore,Ore,Papyrus")); // adds
+                // guild to the played card the player has b/c they have the same effect
             } else if (effect.equalsIgnoreCase("C 9")) {
                 p.setMoney(getCurrentPlayer().getMoney() + 9);
             } else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
@@ -532,7 +519,7 @@ public class Board {
     }
 
     public boolean gameFinished() {
-        if (currentAge == 3 && playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
+        if (playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
                 && playerList.get(2).getHand().size() == 1) {
             return true;
         }
@@ -840,23 +827,15 @@ public class Board {
             Player lowerP = players.get(lower);
             Player higherP = players.get(higher);
 
-            int currentAgeWP;
-            if (getCurrentAge() == 1)
-                currentAgeWP = 1;
-            else if (getCurrentAge() == 2)
-                currentAgeWP = 3;
-            else
-                currentAgeWP = 5;
-
             if (lowerP.getArmies() > currentP.getArmies() && higherP.getArmies() > currentP.getArmies()) {
                 currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 2);
             } else if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies()) {
                 currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 1);
             }
             if (lowerP.getArmies() < currentP.getArmies() && higherP.getArmies() < currentP.getArmies()) {
-                currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP * 2);
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints() );
             } else if (lowerP.getArmies() < currentP.getArmies() || higherP.getArmies() < currentP.getArmies()) {
-                currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP);
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints() );
             }
         }
     }
@@ -1002,13 +981,7 @@ public class Board {
         p.setBuildWonder(false);
     }
 
-    public int getCurrentAge() {
-        return currentAge;
-    }
 
-    public void setCurrentAge(int currentAge) {
-        this.currentAge = currentAge;
-    }
 
     public boolean isOnWards() {
         return onWards;
@@ -1044,30 +1017,6 @@ public class Board {
 
     public void setToDrawDiscard(Player toDrawDiscard) {
         this.toDrawDiscard = toDrawDiscard;
-    }
-
-    public int getAge1CardQuantity() {
-        return Age1CardQuantity;
-    }
-
-    public void setAge1CardQuantity(int age1CardQuantity) {
-        Age1CardQuantity = age1CardQuantity;
-    }
-
-    public int getAge2CardQuantity() {
-        return Age2CardQuantity;
-    }
-
-    public void setAge2CardQuantity(int age2CardQuantity) {
-        Age2CardQuantity = age2CardQuantity;
-    }
-
-    public int getAge3CardQuantity() {
-        return Age3CardQuantity;
-    }
-
-    public void setAge3CardQuantity(int age3CardQuantity) {
-        Age3CardQuantity = age3CardQuantity;
     }
 
     public Deck getDeck() {

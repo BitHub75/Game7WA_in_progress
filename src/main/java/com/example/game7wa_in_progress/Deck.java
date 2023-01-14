@@ -1,18 +1,15 @@
 package com.example.game7wa_in_progress;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
-
 public class Deck {
     private ArrayList<Card> ageOne;
     private ArrayList<Card> ageTwo;
     private ArrayList<Card> ageThree;
     private ArrayList<Card> discard;
-
     public Deck() throws IOException {
         ageOne = new ArrayList<Card>();
         ageTwo = new ArrayList<Card>();
@@ -24,64 +21,51 @@ public class Deck {
         shuffle(3);
 //    	printall();
     }
-
     public Deck(ArrayList<Card> a1, ArrayList<Card> a2, ArrayList<Card> a3, ArrayList<Card> d) {
         ageOne = a1;
         ageTwo = a2;
         ageThree = a3;
         discard = d;
     }
-
     /** Debug tool */
     public void printall() {
         System.out.println(ageOne);
         System.out.println(ageTwo);
         System.out.println(ageThree);
     }
-
     public ArrayList<Card> getAgeOne() {
 //    	System.out.println(ageOne);
         return ageOne;
     }
-
     public ArrayList<Card> getAgeTwo() {
 //    	System.out.println(ageTwo);
         return ageTwo;
     }
-
     public ArrayList<Card> getAgeThree() {
 //    	System.out.println(ageThree);
         return ageThree;
     }
-
     public ArrayList<Card> getDiscard() {
         return discard;
     }
-
     public void setAgeOne(ArrayList<Card> a1) {
         ageOne = a1;
     }
-
     public void setAgeTwo(ArrayList<Card> a2) {
         ageTwo = a2;
     }
-
     public void setAgeThree(ArrayList<Card> a3) {
         ageThree = a3;
     }
-
     public void setDiscard(ArrayList<Card> d) {
         discard = d;
     }
-
     public void addDiscard(Card c) {
         discard.add(c);
     }
-
     public void removeDiscard(Card c) {
         discard.remove(c);
     }
-
     public void draw(Player p, int age) {
         if (age == 1) {
             p.addToHand(ageOne.remove(ageOne.size() - 1));
@@ -91,7 +75,6 @@ public class Deck {
             p.addToHand(ageThree.remove(ageThree.size() - 1));
         }
     }
-
     /** Fisher-Yates Shuffle */
     public void shuffle(int age) {
         if (age == 1) {
@@ -114,7 +97,6 @@ public class Deck {
             }
         }
     }
-
     public void readInCards(File file) throws IOException {
         Scanner scan = new Scanner(file);
         scan.nextLine();
@@ -129,6 +111,7 @@ public class Deck {
 //	            System.out.println("\n"+temp[3]);
                 int age = Integer.parseInt(temp[3]);
                 Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
+                Card card = new Card(temp[0], temp[1], temp[2], temp[4], temp[5], temp[6]);
                 if (age == 1)
                     getAgeOne().add(card);
                 else if (age == 2)
@@ -145,7 +128,6 @@ public class Deck {
 //      System.out.println(ageOne);
         scan.close();
     }
-
     public static void main(String[] args) throws IOException {
         Deck deck = new Deck();
         for (Card card : deck.getAgeThree())

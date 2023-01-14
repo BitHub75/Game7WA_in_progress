@@ -1,38 +1,29 @@
 package com.example.game7wa_in_progress;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import static java.lang.System.out;
-
 public class Board {
-    //private int currentAge;
+
     private boolean onWards; // direction
     private int currentPlayer;
     private ArrayList<Player> playerList;
     private Deck deck;
-    //private int Age1CardQuantity;
-    //private int Age2CardQuantity;
-    //private int Age3CardQuantity;
-    private Player toDrawDiscard;
 
+    private Player toDrawDiscard;
     public Board() throws IOException {
         deck = new Deck();
         playerList = new ArrayList<Player>();
         //currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
-
         for (int i = 0; i < 3; i++)
             playerList.add(new Player(i));
-
         //deal(currentAge);
         ArrayList<Wonder> WonderList = new ArrayList<Wonder>();
-
         for (String s : Wonder.WONDERS ) {
             WonderList.add(new Wonder(s));
         }
-
         for (int i = 0; i < playerList.size(); i++) {
             int index = (int) (Math.random() * WonderList.size());
             playerList.get(i).setWonder(WonderList.remove(index));
@@ -45,7 +36,6 @@ public class Board {
         getCurrentPlayer().addToResources(new Resources("Clay"));
         getCurrentPlayer().addToResources(new Resources("Clay"));
     }
-
     public void decodeWonderEffect(String effect, Player p) {
         if (effect.equalsIgnoreCase("VP 3")) {
             p.addVP(3);
@@ -77,6 +67,8 @@ public class Board {
                 // the
                 // same
                 // effect
+                new Card("Scientistsguild", "Purple", "S All", " ", "false", "Wood,Wood,Ore,Ore,Papyrus"); // adds
+                // guild to the played card the player has b/c they have the same effect
             } else if (effect.equalsIgnoreCase("C 9")) {
                 p.setMoney(getCurrentPlayer().getMoney() + 9);
             } else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
@@ -88,7 +80,6 @@ public class Board {
             }
         }
     }
-
     public void decodeEffect(Card c, Player p) {
         if (c != null) {
             String imports = c.getEffect();
@@ -100,8 +91,7 @@ public class Board {
                 {
                     if (enigma[2].equalsIgnoreCase("Wonder")) // dispen
                     {
-                        int y = p.getWonder().getCurrentStage();
-                        p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
+
                     } else // Lighthouse
                     {
                         ArrayList<Card> list = p.getPlayedCards().get(enigma[2]);
@@ -116,7 +106,6 @@ public class Board {
                 }
                 if (enigma[1].equalsIgnoreCase("LRD")) // vineyard
                 {
-
                     // For LRD Cards\
                     ArrayList<Card> test = p.getPlayedCards().get(enigma[2]);
                     int y = 0;
@@ -143,14 +132,12 @@ public class Board {
                         y = t.size();
                     }
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
-
                     t = p2.getPlayedCards().get(enigma[2]);
                     y = 0;
                     if (t != null) {
                         y = t.size();
                     }
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
-
                 }
                 if (enigma[1].equalsIgnoreCase("LR")) {
                     // For LR Cards
@@ -235,7 +222,6 @@ public class Board {
             p.addToPlayedCards(c);
         }
     }
-
     public void calcVP(Player p) {
         TreeMap<String, ArrayList<Card>> playedCards = p.getPlayedCards();
         TreeMap<String, Integer> vpSources = p.getVpSources();
@@ -244,23 +230,13 @@ public class Board {
         int vpFromCoins = p.getMoney() / 3;
         vpSources.put("Coins", vpFromCoins);
         vp += vpFromCoins;
-
         // adds VP for wonders
         int vpFromWonders = 0;
-        for (int i = 1; i <= p.getWonder().getCurrentStage(); i++) {
-            String effect = p.getWonder().getEffect(i);
-            String[] com = effect.split(" ");
-            if (effect.contains("VP")) {
-                vp += Integer.parseInt(com[1]);
-                vpFromWonders += Integer.parseInt(com[1]);
-            }
-        }
-        vpSources.put("Wonder", vpFromWonders);
 
+        vpSources.put("Wonder", vpFromWonders);
         int war = p.getWarPlusPoints() - p.getWarMinusPoints();
         vpSources.put("War", war);
         vp += war;
-
         int blueCards = 0;
         // adds VP for blue
         ArrayList<Card> temp = playedCards.get("blue"); // Example: VP 5, VP 7
@@ -274,7 +250,6 @@ public class Board {
             }
         }
         vpSources.put("BlueCards", blueCards);
-
         int yellowCards = 0;
         // VP for yellow
         temp = playedCards.get("yellow");
@@ -297,18 +272,7 @@ public class Board {
                 if (com[0].equals("VP")) {
                     if (com[2].equalsIgnoreCase("wonder")) {
                         if (com[1].equals("LR")) {
-                            vp += pl.getWonder().getCurrentStage();
-                            vp += p2.getWonder().getCurrentStage();
-                            yellowCards += pl.getWonder().getCurrentStage();
-                            yellowCards += p2.getWonder().getCurrentStage();
-                        }
-                        if (com[1].equals("LRD")) {
-                            vp += pl.getWonder().getCurrentStage();
-                            vp += p2.getWonder().getCurrentStage();
-                            vp += p.getWonder().getCurrentStage();
-                            yellowCards += pl.getWonder().getCurrentStage();
-                            yellowCards += p2.getWonder().getCurrentStage();
-                            yellowCards += p.getWonder().getCurrentStage();
+
                         }
                     } else {
                         if (com[1].equals("D")) {
@@ -367,15 +331,15 @@ public class Board {
             }
         }
         vpSources.put("YellowCards", yellowCards);
-
         int guildCards = 0;
         // Vp for guilds
         temp = playedCards.get("purple"); // Examples: VP LR blue, VP LRD wonder, VP LR minusWar
         if (temp != null) {
+            String[] com = new String[0];
             for (Card c : temp) {
                 String effect = c.getEffect();
                 effect.trim();
-                String[] com = effect.split(" ");
+                com = effect.split(" ");
                 if (com[0].equals("VP")) {
                     if (com[1].equals("LR")) {
                         // com 2 is the type of card searching for
@@ -403,7 +367,6 @@ public class Board {
                             }
                             vp += y;
                             guildCards += y;
-
                             ArrayList<Card> ta = p2.getPlayedCards().get(com[2]);
                             int z = 0;
                             if (ta != null) {
@@ -438,63 +401,55 @@ public class Board {
                     if (upper == 3) {
                         upper = 0;
                     }
-
                     if (upper == -1) {
                         upper = 0;
                     }
-
                     Player pl = playerList.get(lower);
                     Player p2 = playerList.get(upper);
-                    if (com[1].equals("LRD")) {
-                        vp += pl.getWonder().getCurrentStage();
-                        vp += p.getWonder().getCurrentStage();
-                        vp += p2.getWonder().getCurrentStage();
-                        guildCards += pl.getWonder().getCurrentStage();
-                        guildCards += p.getWonder().getCurrentStage();
-                        guildCards += p2.getWonder().getCurrentStage();
-                    }
-                }
-                if (com[1].equals("S")) {
-                    TreeMap<String, Integer> sciListL = new TreeMap<String, Integer>();
-                    TreeMap<String, Integer> sciListM = new TreeMap<String, Integer>();
-                    TreeMap<String, Integer> sciListG = new TreeMap<String, Integer>();
-                    for (String key : p.getSciList().keySet()) {
-                        sciListL.put(key, p.getSciList().get(key));
-                        sciListM.put(key, p.getSciList().get(key));
-                        sciListG.put(key, p.getSciList().get(key));
-                    }
-                    int l = p.getSciList().get("lit");
-                    int m = p.getSciList().get("math");
-                    int g = p.getSciList().get("gear");
-                    sciListL.put("lit", l + 1);
-                    sciListM.put("math", m + 1);
-                    sciListG.put("gear", g + 1);
-                    int lit = calcSci(sciListL);
-                    int math = calcSci(sciListM);
-                    int gear = calcSci(sciListG);
-                    if (lit >= math && lit > gear) {
-                        p.getSciList().put("lit", p.getSciList().get("lit") + 1);
-                    } else if (math > lit && math > gear) {
-                        p.getSciList().put("math", p.getSciList().get("math") + 1);
-                    } else if (gear > lit && gear > math) {
-                        p.getSciList().put("gear", p.getSciList().get("gear") + 1);
-                    }
-                }
-                if (com[1].equals("D")) {
-                    if (p.getPlayedCards().get("blue") != null) {
-                        vp += p.getPlayedCards().get("blue").size();
-                        guildCards += p.getPlayedCards().get("blue").size();
-                    }
-                    if (p.getPlayedCards().get("silver") != null) {
-                        vp += p.getPlayedCards().get("silver").size();
-                        guildCards += p.getPlayedCards().get("silver").size();
-                    }
-                    if (p.getPlayedCards().get("brown") != null) {
-                        vp += p.getPlayedCards().get("brown").size();
-                        guildCards += p.getPlayedCards().get("brown").size();
-                    }
+
                 }
             }
+            if (com[1].equals("S")) {
+                TreeMap<String, Integer> sciListL = new TreeMap<String, Integer>();
+                TreeMap<String, Integer> sciListM = new TreeMap<String, Integer>();
+                TreeMap<String, Integer> sciListG = new TreeMap<String, Integer>();
+                for (String key : p.getSciList().keySet()) {
+                    sciListL.put(key, p.getSciList().get(key));
+                    sciListM.put(key, p.getSciList().get(key));
+                    sciListG.put(key, p.getSciList().get(key));
+                }
+                int l = p.getSciList().get("lit");
+                int m = p.getSciList().get("math");
+                int g = p.getSciList().get("gear");
+                sciListL.put("lit", l + 1);
+                sciListM.put("math", m + 1);
+                sciListG.put("gear", g + 1);
+                int lit = calcSci(sciListL);
+                int math = calcSci(sciListM);
+                int gear = calcSci(sciListG);
+                if (lit >= math && lit > gear) {
+                    p.getSciList().put("lit", p.getSciList().get("lit") + 1);
+                } else if (math > lit && math > gear) {
+                    p.getSciList().put("math", p.getSciList().get("math") + 1);
+                } else if (gear > lit && gear > math) {
+                    p.getSciList().put("gear", p.getSciList().get("gear") + 1);
+                }
+            }
+            if (com[1].equals("D")) {
+                if (p.getPlayedCards().get("blue") != null) {
+                    vp += p.getPlayedCards().get("blue").size();
+                    guildCards += p.getPlayedCards().get("blue").size();
+                }
+                if (p.getPlayedCards().get("silver") != null) {
+                    vp += p.getPlayedCards().get("silver").size();
+                    guildCards += p.getPlayedCards().get("silver").size();
+                }
+                if (p.getPlayedCards().get("brown") != null) {
+                    vp += p.getPlayedCards().get("brown").size();
+                    guildCards += p.getPlayedCards().get("brown").size();
+                }
+            }
+        }
         }
         vpSources.put("GuildCards", guildCards);
         int sci = 0;
@@ -504,7 +459,6 @@ public class Board {
         vpSources.put("Science", sci);
         p.setVp(vp);
     }
-
     public int calcSci(Player p) {
         TreeMap<String, Integer> sciList = p.getSciList();
         int vp = 0;
@@ -517,7 +471,6 @@ public class Board {
         vp += (Math.min(Math.min(s1, s2), s3) * 7);
         return vp;
     }
-
     public int calcSci(TreeMap<String, Integer> tree) {
         TreeMap<String, Integer> sciList = tree;
         int vp = 0;
@@ -532,30 +485,12 @@ public class Board {
     }
 
     public boolean gameFinished() {
-        if (currentAge == 3 && playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
+        if (playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
+        if (playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
                 && playerList.get(2).getHand().size() == 1) {
             return true;
         }
         return false;
-    }
-
-    public void deal(int age) {
-        ArrayList<Card> d;
-        d = new ArrayList<Card>();
-        if (age == 1) {
-            d = deck.getAgeOne();
-        } else if (age == 2) {
-            d = deck.getAgeTwo();
-        } else if (age == 3) {
-            d = deck.getAgeThree();
-        }
-
-        for (int i = 0; i < playerList.size(); i++) {
-            for (int j = 6; j >= 0; j--) {
-                Card temp = d.remove(j);
-                playerList.get(i).addToHand(temp);
-            }
-        }
     }
 
     public void incrementPlayerLocation() {
@@ -566,7 +501,6 @@ public class Board {
         }
         currentPlayer = l;
     }
-
     public void incrementHandLocations() {
         int lower = currentPlayer - 1;
         int higher = currentPlayer + 1;
@@ -577,7 +511,6 @@ public class Board {
         ArrayList<Card> currentPlayerHand = getCurrentPlayer().getHand();
         ArrayList<Card> lowerPlayerHand = getPlayerList().get(lower).getHand();
         ArrayList<Card> higherPlayerHand = getPlayerList().get(higher).getHand();
-
         if (onWards) {
             getPlayerList().get(lower).setHand(higherPlayerHand);
             getPlayerList().get(currentPlayer).setHand(lowerPlayerHand);
@@ -588,30 +521,24 @@ public class Board {
             getPlayerList().get(higher).setHand(lowerPlayerHand);
         }
     }
-
     public boolean playable(Card c) {
         if (c == null)
             return false;
-
         Player p = getCurrentPlayer();
         TreeMap<String, ArrayList<Card>> played = playerList.get(currentPlayer).getPlayedCards();
-
         for (String key : played.keySet()) {
             ArrayList<Card> temp = played.get(key);
             if (temp.contains(c)) {
                 return false; // has card been played
             }
         }
-
         if (c.isFree()) // is card free
         {
             return true;
         }
-
         if (p.isIgnoreCost()) {
             return true;
         }
-
         for (String s : played.keySet()) // does card chain off another card
         {
             for (Card i : played.get(s)) {
@@ -619,23 +546,19 @@ public class Board {
                     return true;
             }
         }
-
         if (c.getCost().toString().contains("C 1")) // does card have coin cost
         {
             if (getCurrentPlayer().getMoney() >= 1)
                 return true;
         }
-
         // Resource check
         ArrayList<Resources> tempR = playerList.get(currentPlayer).getResources(); // Player's resources
         ArrayList<Resources> cost = c.getCost(); // card cost
         // ArrayList<Resources> costRemove=cost;
         ArrayList<Resources> resources = new ArrayList<Resources>();
-
         for (int i = 0; i < tempR.size(); i++)
             resources.add(tempR.get(i));
         tempR = null;
-
         for (int i = cost.size() - 1; i >= 0; i--) {
             for (int j = resources.size() - 1; j >= 0; j--) {
                 if (resources.get(j).toString().contains(cost.get(i).toString())) {
@@ -663,14 +586,12 @@ public class Board {
                 }
                 ArrayList<Resources> leftResources = playerList.get(lower).getResources();
                 ArrayList<Resources> rightResources = playerList.get(higher).getResources();
-
                 if (!leftResources.contains(r) && !rightResources.contains(r)) {
                     trade.clear();
                     return false;
                 } else if (leftResources.contains(r) && rightResources.contains(r)) {
                     int tempCostLeft = determineCost(r, false, currentPlayer);
                     int tempCostRight = determineCost(r, true, currentPlayer);
-
                     if (tempCostLeft <= tempCostRight) {
                         costLeft += tempCostLeft;
                         if (trade.get(lower) == null) {
@@ -718,7 +639,6 @@ public class Board {
                     }
                 }
             }
-
             if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight) {
                 return true;
             }
@@ -726,11 +646,9 @@ public class Board {
             return false;
         }
     }
-
     public void payCosts(int id) // Pays coins costs
     {
         Player p = getPlayerList().get(id);
-
         if (p.isIgnoreCost()) {
             p.setIgnoreCost(false);
         } else if (p.isBurnCard()) {
@@ -752,7 +670,6 @@ public class Board {
             p.getTrade().clear();
         }
     }
-
     public int determineCost(Resources r, boolean isRight, int index) {
         Player p = playerList.get(index);
         // returns coin cost for a resource
@@ -787,13 +704,11 @@ public class Board {
             }
         }
     }
-
     public void trade(Player p1, Player p2, Resources r) {
         if (p1.getMoney() >= 0) {
             int index = p1.getIndex();
             int temp = p2.getIndex();
             boolean isRight;
-
             if (index == 0) {
                 if (temp == 1)
                     isRight = true;
@@ -818,14 +733,6 @@ public class Board {
         }
     }
 
-    public boolean ageOver() {
-        ArrayList<Player> players = getPlayerList();
-        for (int i = 0; i < players.size(); i++)
-            if (players.get(i).getHand().size() > 1)
-                return false;
-        return true;
-    }
-
     public void calcWarPoints() {
         ArrayList<Player> players = getPlayerList();
         for (int i = 0; i < players.size(); i++) {
@@ -840,13 +747,7 @@ public class Board {
             Player lowerP = players.get(lower);
             Player higherP = players.get(higher);
 
-            int currentAgeWP;
-            if (getCurrentAge() == 1)
-                currentAgeWP = 1;
-            else if (getCurrentAge() == 2)
-                currentAgeWP = 3;
-            else
-                currentAgeWP = 5;
+
 
             if (lowerP.getArmies() > currentP.getArmies() && higherP.getArmies() > currentP.getArmies()) {
                 currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 2);
@@ -854,13 +755,14 @@ public class Board {
                 currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 1);
             }
             if (lowerP.getArmies() < currentP.getArmies() && higherP.getArmies() < currentP.getArmies()) {
-                currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP * 2);
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints() );
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints() );
             } else if (lowerP.getArmies() < currentP.getArmies() || higherP.getArmies() < currentP.getArmies()) {
-                currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP);
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints());
+                currentP.setWarPlusPoints(currentP.getWarPlusPoints() );
             }
         }
     }
-
     public boolean canBuildWonder(Player p, int stage) {
         Player player = p;
         Wonder wonder = player.getWonder();
@@ -871,17 +773,14 @@ public class Board {
             return false;
         else if (stage > currentStage + 1)
             return false;
-
         ArrayList<Resources> cost = new ArrayList<Resources>();
         ArrayList<Resources> resources = new ArrayList<Resources>(); // local copy of resources
         for (Resources r : player.getResources())
             resources.add(r);
-
         String temp = wonder.getCost(stage);
         String[] stageCost = temp.split(",");
         for (int i = 0; i < stageCost.length; i++)
             cost.add(new Resources(stageCost[i]));
-
         for (int j = resources.size() - 1; j >= 0; j--) {
             for (int i = cost.size() - 1; i >= 0; i--) {
                 if (resources.get(j).toString().contains(cost.get(i).toString())) {
@@ -915,7 +814,6 @@ public class Board {
                 } else if (leftResources.contains(r) && rightResources.contains(r)) {
                     int tempCostLeft = determineCost(r, false, currentPlayer);
                     int tempCostRight = determineCost(r, true, currentPlayer);
-
                     if (tempCostLeft <= tempCostRight) {
                         costLeft += tempCostLeft;
                         if (trade.get(lower) == null) {
@@ -970,31 +868,24 @@ public class Board {
             return false;
         }
     }
-
     public void printEverything() {
         System.out.println("Player " + (getCurrentPlayer().getIndex()) + 1 + " is currently playing");
-
         for (int i = 0; i < 3; i++) {
             System.out.println("Player " + (i + 1) + "'s hand is " + playerList.get(i).getHand().toString());
         }
-
         for (int i = 0; i < 3; i++) {
             System.out.println(
                     "Player " + (i + 1) + "'s played cards are " + playerList.get(i).getPlayedCards().toString());
         }
-
         for (int i = 0; i < 3; i++) {
             System.out.println(
                     "Player " + (i + 1) + "'s played cards are " + playerList.get(i).getResources().toString());
         }
-
         for (int i = 0; i < 3; i++) {
             System.out.println("Player " + (i + 1) + " has built " + playerList.get(i).getWonder().getCurrentStage()
                     + " stages of their wonder");
         }
-
     }
-
     public void buildWonder(Player p, int stage, Card card) {
         Wonder wonder = p.getWonder();
         wonder.setCurrentStage(stage);
@@ -1002,80 +893,42 @@ public class Board {
         p.setBuildWonder(false);
     }
 
-    public int getCurrentAge() {
-        return currentAge;
-    }
 
-    public void setCurrentAge(int currentAge) {
-        this.currentAge = currentAge;
-    }
+
 
     public boolean isOnWards() {
         return onWards;
     }
-
     public void setOnWards(boolean onWards) {
         this.onWards = onWards;
     }
-
     public Player getCurrentPlayer() {
         return playerList.get(currentPlayer);
     }
-
     public int getCurrentTurn() {
         return currentPlayer;
     }
-
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
-
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
-
     public void setPlayerList(ArrayList<Player> playerList) {
         this.playerList = playerList;
     }
-
     public Player getToDrawDiscard() {
         return toDrawDiscard;
     }
-
     public void setToDrawDiscard(Player toDrawDiscard) {
         this.toDrawDiscard = toDrawDiscard;
     }
 
-    public int getAge1CardQuantity() {
-        return Age1CardQuantity;
-    }
-
-    public void setAge1CardQuantity(int age1CardQuantity) {
-        Age1CardQuantity = age1CardQuantity;
-    }
-
-    public int getAge2CardQuantity() {
-        return Age2CardQuantity;
-    }
-
-    public void setAge2CardQuantity(int age2CardQuantity) {
-        Age2CardQuantity = age2CardQuantity;
-    }
-
-    public int getAge3CardQuantity() {
-        return Age3CardQuantity;
-    }
-
-    public void setAge3CardQuantity(int age3CardQuantity) {
-        Age3CardQuantity = age3CardQuantity;
-    }
 
     public Deck getDeck() {
         return deck;
     }
-
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
 }
-

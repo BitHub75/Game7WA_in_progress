@@ -451,14 +451,7 @@ public class Board {
             }
         }
         }
-        vpSources.put("GuildCards", guildCards);
-        int sci = 0;
-        // adds VP for sci
-        vp += calcSci(p);
-        sci = calcSci(p);
-        vpSources.put("Science", sci);
-        p.setVp(vp);
-    }
+
     public int calcSci(Player p) {
         TreeMap<String, Integer> sciList = p.getSciList();
         int vp = 0;
@@ -485,7 +478,7 @@ public class Board {
     }
 
     public boolean gameFinished() {
-        if (playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
+
         if (playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1
                 && playerList.get(2).getHand().size() == 1) {
             return true;

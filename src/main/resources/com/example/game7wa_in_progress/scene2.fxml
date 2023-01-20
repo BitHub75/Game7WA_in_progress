@@ -5,20 +5,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game7wa_in_progress.LobbyController">
+<AnchorPane prefHeight="357.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game7wa_in_progress.LobbyController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="615.0" layoutX="-8.0">
+      <ImageView fitHeight="356.0" fitWidth="564.0" layoutX="-8.0">
          <image>
             <Image url="@../../../Images/images/fond/7wonders-wallpaper-3-1598892296z8FQD.jpg" />
          </image>
       </ImageView>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <ChoiceBox fx:id="choicebox1" layoutX="225.0" layoutY="222.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBoxNumbers" layoutX="203.0" layoutY="166.0" prefWidth="150.0" />
       <Text layoutX="141.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHOISISSEZ LE NOMBRE DE JOUEURS " textAlignment="CENTER" wrappingWidth="317.1367492675781">
          <font>
             <Font size="22.0" />
          </font></Text>
-      <Button layoutX="269.0" layoutY="281.0" mnemonicParsing="false" text="Confirmer" />
-      <Label fx:id="Initialize" layoutX="290.0" layoutY="313.0" text="Label" />
+      <Button layoutX="243.0" layoutY="205.0" mnemonicParsing="false" text="Confirmer" />
+      <Label fx:id="Initialize" layoutX="290.0" layoutY="313.0" />
    </children>
 </AnchorPane>

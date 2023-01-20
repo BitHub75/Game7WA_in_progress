@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 public class LobbyController {
-
+    ObservableList<Integer> numbers = FXCollections.observableArrayList(2, 3, 4, 5, 6, 7);
 
     @FXML
     private ChoiceBox<Integer> choiceBoxNumbers;
@@ -15,7 +15,7 @@ public class LobbyController {
     @FXML
     public void initialize() {
         // Initialisation de la ChoiceBox
-        ObservableList<Integer> numbers = FXCollections.observableArrayList(2, 3, 4, 5, 6, 7);
+
         choiceBoxNumbers.setItems(numbers);
         choiceBoxNumbers.setValue(2);
     }

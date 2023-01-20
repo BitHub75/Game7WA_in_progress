@@ -14,7 +14,7 @@
       <ImageView fitHeight="292.0" fitWidth="515.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="107.0" fitWidth="335.0" layoutX="86.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="202.0" layoutY="117.0" mnemonicParsing="false" onAction="#clickbutton" prefHeight="25.0" prefWidth="104.0" text="Play" />
-      <Button layoutX="428.0" layoutY="31.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Rules" />
+      <Button layoutX="428.0" layoutY="31.0" mnemonicParsing="false" onAction="#buttonRules" prefHeight="25.0" prefWidth="64.0" text="Rules" />
       <ImageView fitHeight="86.0" fitWidth="292.0" layoutX="108.0" layoutY="174.0">
          <image>
             <Image url="@../../../Images/images/fond/Logo7Wonders.png" />

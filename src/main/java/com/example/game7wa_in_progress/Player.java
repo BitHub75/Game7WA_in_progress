@@ -19,21 +19,6 @@ public class Player implements Comparable<Player> {
     private TreeMap<Integer, ArrayList<Resources>> trade; // Player index, resources
     private boolean isDrawDiscard;
 
-    private int money, warMinusPoints, warPlusPoints, armies, index, vp; //argent, Points de geurre négatifs, Points de guerre positifs, Armees, index, Victory Points
-    private TreeMap<String, Integer> vpSources; //source des VP
-    private TreeMap<String, Boolean> reducedList; //liste des reductions
-    private TreeMap<String, Integer> sciList; //liste des points scientifiques
-    private TreeMap<String, ArrayList<Card>> playedCards; //liste cartes jouees
-    private ArrayList<Card> hand; //liste cartes dans la main
-    private Wonder wonder; //merveilles
-    private ArrayList<Resources> resources; //resources
-    private ArrayList<Card> tempPlayedCards; //liste des temps écoulés par carte jouée
-    private boolean burnCard; //cartes mortes
-    private boolean ignoreCost; //si une carte n'a pas de cout
-    private boolean buildWonder; //pour construire une etape d'une merveille
-    private boolean Has_VP_Effect; //si une carte a un effet avec des VP
-    private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
-    private boolean isDrawDiscard; //?
 
     //definition player
     public Player(int index) {

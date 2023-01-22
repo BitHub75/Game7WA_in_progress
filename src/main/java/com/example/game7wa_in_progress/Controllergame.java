@@ -22,8 +22,13 @@ public class Controllergame {
 
     }
     @FXML
+    Label helplabel;
+    @FXML
     void labelanyprogresstoken (MouseEvent event){
-        helplabel.setText("pile de jetons progrès");
+        helplabel.setText("Pile de jetons progrès");
     }
-
+    @FXML
+    void labelchat (MouseEvent event){
+        helplabel.setText("Jeton chat");
+    }
 }

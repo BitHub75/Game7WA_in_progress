@@ -21,7 +21,7 @@ public class HelloController {
         try {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(("scene2.fxml")));
-            Scene scene = new Scene(fxmlLoader.load(), 515, 292);
+            Scene scene = new Scene(fxmlLoader.load(), 555, 357);
             stage.setTitle("menu");
             stage.setScene(scene);
             stage.show();

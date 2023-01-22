@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="357.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game7wa_in_progress.LobbyController">
    <children>
@@ -18,7 +22,7 @@
          <font>
             <Font size="22.0" />
          </font></Text>
-      <Button layoutX="243.0" layoutY="205.0" mnemonicParsing="false" text="Confirmer" />
+      <Button layoutX="243.0" layoutY="205.0" mnemonicParsing="false" onAction="#clickbutton2" text="Confirmer" />
       <Label fx:id="Initialize" layoutX="290.0" layoutY="313.0" />
    </children>
 </AnchorPane>

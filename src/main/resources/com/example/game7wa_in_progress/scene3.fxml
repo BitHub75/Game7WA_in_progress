@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="477.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game7wa_in_progress.Controllergame">
+<AnchorPane prefHeight="477.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game7wa_in_progress.Controllergame">
    <children>
       <ImageView fitHeight="496.0" fitWidth="792.0" layoutX="-45.0" layoutY="-8.0">
          <image>
@@ -13,62 +13,63 @@
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="575.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/Sansonetti%20Matteo/Game7WA_in_progress/src/main/resources/Images/images/tokens-progress/token-urbanism.png" />
+            <Image url="@../../../Images/images/tokens-progress/token-urbanism.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="90.0" fitWidth="60.0" layoutX="204.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\cards\card-back\card-back-question.png" />
+            <Image url="@../../../Images/images/cards/card-back/card-back-question.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="87.0" fitWidth="60.0" layoutX="89.0" layoutY="365.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/Sansonetti%20Matteo/Game7WA_in_progress/src/main/resources/Images/images/cards/card-progress-architect.png" />
+            <Image url="@../../../Images/images/cards/card-progress-architect.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="87.0" fitWidth="60.0" layoutX="613.0" layoutY="365.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\cards\card-war-barbarian-1corn.png" />
+            <Image url="@../../../Images/images/cards/card-war-barbarian-1corn.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="537.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/Sansonetti%20Matteo/Game7WA_in_progress/src/main/resources/Images/images/tokens-progress/token-politic.png" />
+            <Image url="@../../../Images/images/tokens-progress/token-politic.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="497.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="497.0" layoutY="14.0" onMouseDragged="#labelanyprogresstoken" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/Sansonetti%20Matteo/Game7WA_in_progress/src/main/resources/Images/images/tokens-progress/token-culture.png" />
+            <Image url="@../../../Images/images/tokens-progress/token-culture.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="451.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="451.0" layoutY="14.0" onMouseEntered="#labelanyprogresstoken" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\tokens-progress\back\token-back.png" />
+            <Image url="@../../../Images/images/tokens-progress/back/token-back.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="49.0" fitWidth="109.0" layoutX="330.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\wonders\alexandrie\piece-back-alexandrie-2.png" />
+            <Image url="@../../../Images/images/wonders/alexandrie/piece-back-alexandrie-2.png" />
          </image></ImageView>
       <ImageView fitHeight="38.0" fitWidth="211.0" layoutX="282.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\wonders\alexandrie\piece-back-alexandrie-1.png" />
+            <Image url="@../../../Images/images/wonders/alexandrie/piece-back-alexandrie-1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="97.0" fitWidth="48.0" layoutX="349.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\wonders\alexandrie\piece-back-alexandrie-6.png" />
+            <Image url="@../../../Images/images/wonders/alexandrie/piece-back-alexandrie-6.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="49.0" fitWidth="106.0" layoutX="327.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\wonders\alexandrie\piece-back-alexandrie-4.png" />
+            <Image url="@../../../Images/images/wonders/alexandrie/piece-back-alexandrie-4.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="64.0" fitWidth="68.0" layoutX="339.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\Sansonetti Matteo\Game7WA_in_progress\src\main\resources\Images\images\wonders\alexandrie\piece-back-alexandrie-3.png" />
+            <Image url="@../../../Images/images/wonders/alexandrie/piece-back-alexandrie-3.png" />
          </image>
       </ImageView>
+      <Label fx:id="helplabel" layoutX="118.0" layoutY="260.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

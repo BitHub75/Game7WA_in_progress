@@ -6,45 +6,11 @@ import java.util.TreeMap;
 import static java.lang.System.out;
 
 public class Board {
-    //private int currentAge;
     private boolean onWards; // direction
     private int currentPlayer;
     private ArrayList<Player> playerList;
     private Deck deck;
-    //private int Age1CardQuantity;
-    //private int Age2CardQuantity;
-    //private int Age3CardQuantity;
     private Player toDrawDiscard;
-
-    public Board() throws IOException {
-        deck = new Deck();
-        playerList = new ArrayList<Player>();
-        //currentAge = 1;
-        onWards = true;
-        currentPlayer = 0; // players are 0,1,2
-
-        for (int i = 0; i < 3; i++)
-            playerList.add(new Player(i));
-
-        //deal(currentAge);
-        ArrayList<Wonder> WonderList = new ArrayList<Wonder>();
-
-        for (String s : Wonder.WONDERS ) {
-            WonderList.add(new Wonder(s));
-        }
-
-        for (int i = 0; i < playerList.size(); i++) {
-            int index = (int) (Math.random() * WonderList.size());
-            playerList.get(i).setWonder(WonderList.remove(index));
-            playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
-        }
-        getCurrentPlayer().setWonder(new Wonder("Halikarnassus"));
-        getCurrentPlayer().addToResources(new Resources("Ore"));
-        getCurrentPlayer().addToResources(new Resources("Ore"));
-        getCurrentPlayer().addToResources(new Resources("Ore"));
-        getCurrentPlayer().addToResources(new Resources("Clay"));
-        getCurrentPlayer().addToResources(new Resources("Clay"));
-    }
 
     public void decodeWonderEffect(String effect, Player p) {
         if (effect.equalsIgnoreCase("VP 3")) {
@@ -66,10 +32,10 @@ public class Board {
                 // guild to the played card the player has b/c they have the same effect
             } else if (effect.equalsIgnoreCase("C 9")) {
                 p.setMoney(getCurrentPlayer().getMoney() + 9);
-            } else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
+            } else if (effect.equalsIgnoreCase("ignoreCost"))
             {
                 p.setIgnoreCost(true);
-            } else if (effect.equalsIgnoreCase("drawDiscard")) // call once at the end of turn (not age)
+            } else if (effect.equalsIgnoreCase("drawDiscard")) // call once at the end of turn
             {
                 p.setDrawDiscard(true);
             }
@@ -529,14 +495,6 @@ public class Board {
     public void deal(int age) {
         ArrayList<Card> d;
         d = new ArrayList<Card>();
-        if (age == 1) {
-            d = deck.getAgeOne();
-        } else if (age == 2) {
-            d = deck.getAgeTwo();
-        } else if (age == 3) {
-            d = deck.getAgeThree();
-        }
-
         for (int i = 0; i < playerList.size(); i++) {
             for (int j = 6; j >= 0; j--) {
                 Card temp = d.remove(j);

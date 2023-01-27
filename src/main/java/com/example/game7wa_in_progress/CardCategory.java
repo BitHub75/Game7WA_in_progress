@@ -7,3 +7,4 @@ public enum CardCategory {
     WarCard,
     PoliticCard
 }
+

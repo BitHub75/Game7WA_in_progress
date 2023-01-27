@@ -54,3 +54,4 @@ public enum Wonder {
     public void setAvailableFalse() {available = false;}
 }
 
+

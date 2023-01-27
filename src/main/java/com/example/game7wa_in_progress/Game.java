@@ -220,6 +220,7 @@ public class Game {
 
     }
 
+    
     public static void constructionMerveille(Player player, ArrayList<Integer> constructionsPossibles){
         //TODO FAIRE LE CHOIX DE QUELLE PIECE MONTER SI Y A LE CHOIX + ENLEVER LES CARTES UTILISEES
 

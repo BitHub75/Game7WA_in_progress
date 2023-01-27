@@ -38,3 +38,4 @@ public class Resources {
         return resource.hashCode();
     }
 }
+
